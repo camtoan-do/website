@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cam Toan Do</title>
+  <meta name="description" content="Cam Toan Do: cybersecurity coordinator focused on Microsoft 365 security and governance.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="styles.css">
+  <!-- loads before paint so a saved light/dark choice never flashes -->
+  <script src="script.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <a class="mark" href="/">camtoan.me</a>
+    <nav class="nav" aria-label="Elsewhere">
+      <a href="https://substack.com/@camtoando">Writing</a>
+      <a href="https://github.com/camtoan-do">GitHub</a>
+      <a href="mailto:official@camtoan.me">Email</a>
+    </nav>
+    <div class="theme" role="group" aria-label="Colour theme">
+      <button type="button" data-theme-set="system" aria-pressed="true">Auto</button>
+      <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="story">
+      <!-- the map: scattered on arrival, each chapter below pulls its pieces into place -->
+      <div class="stage" aria-hidden="true">
+        <svg class="map" viewBox="0 0 900 800" preserveAspectRatio="xMidYMid meet">
+          <g class="world">
+            <g class="frame">
+              <path d="M110 158V130h28M552 130h28v28M580 402v28h-28M138 430h-28v-28"/>
+            </g>
+
+            <g class="links">
+              <line class="link" data-ch="1" data-a="core" data-b="m365" pathLength="1" x1="450" y1="380" x2="290" y2="270"/>
+              <line class="link" data-ch="1" data-a="m365" data-b="gov" pathLength="1" x1="290" y1="270" x2="150" y2="190"/>
+              <line class="link" data-ch="1" data-a="core" data-b="gov" pathLength="1" x1="450" y1="380" x2="150" y2="190"/>
+              <line class="link" data-ch="2" data-a="core" data-b="secplus" pathLength="1" x1="450" y1="380" x2="500" y2="170"/>
+              <line class="link" data-ch="2" data-a="core" data-b="cloud" pathLength="1" x1="450" y1="380" x2="650" y2="270"/>
+              <line class="link" data-ch="2" data-a="cloud" data-b="azure" pathLength="1" x1="650" y1="270" x2="640" y2="120"/>
+              <line class="link" data-ch="2" data-a="cloud" data-b="aws" pathLength="1" x1="650" y1="270" x2="790" y2="360"/>
+              <line class="link" data-ch="2" data-a="cloud" data-b="awsai" pathLength="1" x1="650" y1="270" x2="760" y2="460"/>
+              <line class="link" data-ch="3" data-a="core" data-b="projects" pathLength="1" x1="450" y1="380" x2="420" y2="580"/>
+              <line class="link" data-ch="3" data-a="projects" data-b="albert" pathLength="1" x1="420" y1="580" x2="640" y2="600"/>
+            </g>
+
+            <!-- squares are topics, crosses are things -->
+            <g transform="translate(450 380)"><g class="node topic core" data-id="core" data-ch="1"><rect x="-15" y="-15" width="30" height="30"/><text x="26" y="5">SECURITY</text></g></g>
+            <g transform="translate(290 270)"><g class="node topic" data-id="m365" data-ch="1"><rect x="-8" y="-8" width="16" height="16"/><text x="16" y="5">Microsoft 365</text></g></g>
+            <g transform="translate(150 190)"><g class="node thing" data-id="gov" data-ch="1"><path d="M-7 0H7M0-7V7"/><text x="14" y="5">Governance</text></g></g>
+
+            <g transform="translate(650 270)"><g class="node topic" data-id="cloud" data-ch="2"><rect x="-8" y="-8" width="16" height="16"/><text x="16" y="5">Certifications</text></g></g>
+            <g transform="translate(500 170)"><g class="node thing" data-id="secplus" data-ch="2"><path d="M-7 0H7M0-7V7"/><text x="14" y="5">Security+</text></g></g>
+            <g transform="translate(640 120)"><g class="node thing" data-id="azure" data-ch="2"><path d="M-7 0H7M0-7V7"/><text x="14" y="5">Azure Administrator</text></g></g>
+            <g transform="translate(790 360)"><g class="node thing" data-id="aws" data-ch="2"><path d="M-7 0H7M0-7V7"/><text class="end" x="-14" y="-12">AWS Solutions Architect</text></g></g>
+            <g transform="translate(760 460)"><g class="node thing" data-id="awsai" data-ch="2"><path d="M-7 0H7M0-7V7"/><text class="end" x="-14" y="5">AWS AI Business Strategist</text></g></g>
+
+            <g transform="translate(420 580)"><g class="node topic live" data-id="projects" data-ch="3"><rect class="ping" x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16"/><text x="16" y="5">Projects</text></g></g>
+            <g transform="translate(640 600)"><a href="https://github.com/kamllistos/albert" tabindex="-1" class="node thing" data-id="albert" data-ch="3"><path d="M-7 0H7M0-7V7"/><text x="14" y="5">Albert</text></a></g>
+          </g>
+        </svg>
+        <p class="readout"><span>Portfolio map</span><span class="count">linked <b>00</b>/10</span></p>
+      </div>
+
+      <div class="steps">
+        <div class="step hero">
+          <h1 aria-label="Cam Toan Do">Cam Toan Do</h1>
+          <p class="lede">Cybersecurity coordinator. I lock down Microsoft 365 and explain it in plain English.</p>
+          <div class="ctas">
+            <a class="btn on" href="#projects">See projects</a>
+            <a class="btn" href="mailto:official@camtoan.me">Get in touch</a>
+          </div>
+          <p class="hint">Scroll to connect the pieces</p>
+        </div>
+
+        <article class="step chapter">
+          <p class="num">01</p>
+          <h2>Security, mostly Microsoft&nbsp;365.</h2>
+          <p>Day job: Cybersecurity Coordinator at a construction company. The focus is Microsoft 365 security and governance.</p>
+        </article>
+
+        <article class="step chapter">
+          <p class="num">02</p>
+          <h2>Certifications</h2>
+          <ul class="list">
+            <li>CompTIA Security+</li>
+            <li>Microsoft Azure Administrator Associate</li>
+            <li>AWS Solutions Architect Associate</li>
+            <li>AWS AI Business Strategist, Early Adopter</li>
+          </ul>
+        </article>
+
+        <article class="step chapter" id="projects">
+          <p class="num">03</p>
+          <h2>Projects</h2>
+          <ul class="list">
+            <li><a href="https://github.com/kamllistos/albert">Albert</a>: one place to see, update and install every dev tool on your Mac (Homebrew, pip, npm and more). Open source, runs locally.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact">
+      <p class="num">04</p>
+      <h2>Let's connect.</h2>
+      <a class="btn on big" href="mailto:official@camtoan.me">official@camtoan.me</a>
+    </section>
+  </main>
+
+  <footer class="foot">Built and maintained by Cam Toan Do</footer>
+</body>
+</html>
