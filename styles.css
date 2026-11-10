@@ -261,3 +261,41 @@ h2 { margin: 12px 0 0; max-width: 14ch; font: 750 clamp(2rem, 3.6vw, 3.4rem)/1 v
   .sign { padding: 20px 16px; }
   .ascii { font-size: 10px; }
 }
+
+/* ==== Glass everywhere, fluid sizing. ====
+   Last on purpose: buttons, the theme switch and blog rows become glass capsules and panes, and fixed pixel
+   sizes give way to ones that flow with the window width. */
+:root {
+  --r-md: clamp(16px, 2vw, 24px);
+  --pane: rgba(255, 255, 255, .58); --pane-edge: rgba(29, 29, 29, .08); --pane-rim: rgba(255, 255, 255, .95);
+  --pane-shadow: inset 0 1px 0 var(--pane-rim), inset 0 0 0 1px var(--pane-edge), 0 1px 2px rgba(0, 0, 0, .05), 0 16px 34px -20px var(--glass-shade);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --pane: rgba(255, 255, 255, .045); --pane-edge: rgba(255, 255, 255, .09); --pane-rim: rgba(255, 255, 255, .16); }
+}
+:root[data-theme="dark"] { --pane: rgba(255, 255, 255, .045); --pane-edge: rgba(255, 255, 255, .09); --pane-rim: rgba(255, 255, 255, .16); }
+
+body { font-size: clamp(13px, .78rem + .18vw, 15px); }
+.btn { border: 0; border-radius: 999px; padding: 11px 20px; background: var(--pane); box-shadow: var(--pane-shadow); }
+.btn.on { background: var(--ink); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), 0 12px 26px -14px var(--glass-shade); }
+.btn.big { padding: clamp(12px, 2vw, 18px) clamp(18px, 3vw, 28px); font-size: clamp(.95rem, 2.4vw, 1.4rem); white-space: normal; overflow-wrap: anywhere; }
+.theme { border: 0; border-radius: 999px; padding: 3px; gap: 2px; background: var(--pane); box-shadow: var(--pane-shadow); }
+.theme button { border-radius: 999px; padding: 5px 10px; font-size: clamp(11px, .6rem + .25vw, 12px); }
+.theme button + button { border-left: 0; }
+
+.posts { border-top: 0; display: grid; gap: clamp(10px, 1.4vw, 14px); }
+.posts li, .posts li:last-child { border: 0; padding: clamp(14px, 2vw, 20px) clamp(16px, 2.4vw, 24px); border-radius: var(--r-md); background: var(--pane); box-shadow: var(--pane-shadow); }
+
+/* dock: labels and padding shrink with the screen so five items always fit, down to the smallest phones */
+.dock { max-width: calc(100vw - 12px); }
+.dock a { font-size: clamp(10.5px, 3vw, 13px); padding: 8px clamp(6px, 2.3vw, 14px); }
+.ascii { font-size: clamp(7.5px, 2.25vw, 13px); }
+.progress { font-size: clamp(10px, 2.8vw, 14px); }
+.page { padding: clamp(88px, 12vw, 128px) var(--pad) 120px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .posts li { transition: transform .4s cubic-bezier(.34, 1.56, .64, 1), background .15s, box-shadow .25s; }
+  .btn:hover { transform: scale(1.04); }
+  .btn:active { transform: scale(.96); }
+  .posts li:hover { transform: translateY(-3px); box-shadow: var(--pane-shadow), 0 0 0 1.5px var(--accent); }
+}
