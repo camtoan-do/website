@@ -12,21 +12,26 @@
   <link rel="stylesheet" href="styles.css">
   <!-- loads before paint so a saved light/dark choice never flashes -->
   <script src="script.js"></script>
+  <script src="glass.js" defer></script>
 </head>
 <body>
   <header class="bar">
     <a class="mark" href="/">camtoan.me</a>
-    <nav class="nav" aria-label="Elsewhere">
-      <a href="https://substack.com/@camtoando">Writing</a>
-      <a href="https://github.com/camtoan-do">GitHub</a>
-      <a href="mailto:official@camtoan.me">Email</a>
-    </nav>
     <div class="theme" role="group" aria-label="Colour theme">
       <button type="button" data-theme-set="system" aria-pressed="true">Auto</button>
       <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
       <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
     </div>
   </header>
+
+  <!-- floating glass dock: the main menu on every page and every screen size -->
+  <nav class="dock glass" aria-label="Main">
+    <a href="/" aria-current="page">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="/services/">Services</a>
+    <a href="https://github.com/camtoan-do">GitHub</a>
+    <a href="mailto:official@camtoan.me">Email</a>
+  </nav>
 
   <main>
     <section class="story">
@@ -114,6 +119,6 @@
     </section>
   </main>
 
-  <footer class="foot">Built and maintained by Cam Toan Do</footer>
+  <footer class="foot"><span class="spin" aria-hidden="true"></span>Built and maintained by Cam Toan Do</footer>
 </body>
 </html>

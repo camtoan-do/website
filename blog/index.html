@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog — Cam Toan Do</title>
+  <meta name="description" content="Practical security, in plain English. Posts by Cam Toan Do, refreshed daily from Substack.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://camtoan.me/blog/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/styles.css">
+  <!-- loads before paint so a saved light/dark choice never flashes -->
+  <script src="/script.js"></script>
+  <script src="/glass.js" defer></script>
+</head>
+<body>
+  <header class="bar">
+    <a class="mark" href="/">camtoan.me</a>
+    <div class="theme" role="group" aria-label="Colour theme">
+      <button type="button" data-theme-set="system" aria-pressed="true">Auto</button>
+      <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+    </div>
+  </header>
+
+  <nav class="dock glass" aria-label="Main">
+    <a href="/">Home</a>
+    <a href="/blog/" aria-current="page">Blog</a>
+    <a href="/services/">Services</a>
+    <a href="https://github.com/camtoan-do">GitHub</a>
+    <a href="mailto:official@camtoan.me">Email</a>
+  </nav>
+
+  <main class="page">
+    <p class="num">Blog</p>
+    <h1>Writing.</h1>
+    <p class="lede">Practical security, in plain English. I write on Substack; this list refreshes itself every day.</p>
+    <div class="ctas">
+      <a class="btn on" href="https://substack.com/@camtoando" rel="noopener">Subscribe on Substack</a>
+    </div>
+
+    <p class="prompt" aria-hidden="true"><b>$</b> ls -lt posts/<span class="cursor">_</span></p>
+    <ol class="posts">
+      <!-- posts:start (filled in by .github/scripts/build-blog.mjs; edits between these markers are overwritten) -->
+      <li><time datetime="2026-10-26">2026-10-26</time><div><a href="https://camtoando.substack.com/p/i-asked-ai-how-to-have-an-efficient" rel="noopener noreferrer">I asked AI how to have an efficient weekend so you don&#39;t have to</a><span class="where">Substack ↗</span></div><p>And the answers weren&#39;t disappointing at all.</p></li>
+      <li><time datetime="2026-10-15">2026-10-15</time><div><a href="/blog/small-business-security-checklist/">10 security basics every small business should have</a></div><p>A plain-English checklist that stops most real-world attacks — no security team required.</p></li>
+      <li><time datetime="2026-10-04">2026-10-04</time><div><a href="https://camtoando.substack.com/p/the-weekly-tldr-anthropics-leaked" rel="noopener noreferrer">The Weekly TLDR: Anthropic&#39;s leaked IPO math — a $2 trillion ask and an $8 billion loss</a><span class="where">Substack ↗</span></div><p>Anthropic&#39;s numbers leak, Micron prints $54 billion, and the jobs market goes quiet.</p></li>
+      <li><time datetime="2026-07-04">2026-07-04</time><div><a href="https://camtoando.substack.com/p/these-free-websites-could-help-you" rel="noopener noreferrer">These free websites could help you become a cloud engineer</a><span class="where">Substack ↗</span></div><p>It provides tons of roadmaps for the hottest IT pathways right now.</p></li>
+      <!-- posts:end -->
+    </ol>
+  </main>
+
+  <footer class="foot"><span class="spin" aria-hidden="true"></span>Built and maintained by Cam Toan Do</footer>
+</body>
+</html>

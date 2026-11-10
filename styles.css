@@ -40,11 +40,8 @@ a { color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* top bar */
-.bar { position: fixed; inset: 0 0 auto; z-index: 10; display: flex; align-items: center; gap: 24px; padding: 16px var(--pad); background: color-mix(in srgb, var(--bg) 88%, transparent); }
+.bar { position: fixed; inset: 0 0 auto; z-index: 10; display: flex; align-items: center; gap: 24px; padding: 16px var(--pad); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .mark { text-decoration: none; font-weight: 700; margin-right: auto; }
-.nav { display: flex; gap: 20px; }
-.nav a { text-decoration: none; color: var(--muted); }
-.nav a:hover, .nav a:focus-visible { color: var(--ink); text-decoration: underline; }
 .theme { display: flex; border: 1px solid var(--ink); }
 .theme button { font: 12px var(--mono); color: var(--ink); background: none; border: 0; padding: 5px 9px; cursor: pointer; }
 .theme button + button { border-left: 1px solid var(--ink); }
@@ -85,7 +82,7 @@ a { color: inherit; }
 .map .link.lit { stroke: var(--accent); stroke-width: 1.5; }
 .map a.node:hover text { text-decoration: underline; }
 
-.readout { position: absolute; left: 24px; right: 24px; bottom: 20px; margin: 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.readout { position: absolute; left: 24px; right: 24px; bottom: 84px; margin: 0; display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .count b { color: var(--accent); font-weight: 700; }
 
 @keyframes ping {
@@ -119,7 +116,7 @@ h2 { margin: 12px 0 0; max-width: 14ch; font: 750 clamp(2rem, 3.6vw, 3.4rem)/1 v
 .contact { min-height: 80dvh; display: flex; flex-direction: column; justify-content: center; padding: 96px var(--pad); border-top: 1px solid var(--line); }
 .contact h2 { max-width: none; font-size: clamp(2.6rem, 7vw, 6.5rem); }
 
-.foot { padding: 16px var(--pad) 24px; color: var(--muted); font-size: 12px; font-style: italic; }
+.foot { padding: 16px var(--pad) 104px; color: var(--muted); font-size: 12px; font-style: italic; }
 
 /* scroll reveals: only when the script runs, so text is never stuck hidden */
 .js .chapter > * { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
@@ -132,7 +129,6 @@ h2 { margin: 12px 0 0; max-width: 14ch; font: 750 clamp(2rem, 3.6vw, 3.4rem)/1 v
 /* phones: map pins to the top half, text scrolls under it */
 @media (max-width: 900px) {
   .bar { gap: 14px; padding: 12px 16px; }
-  .nav { display: none; }
   .story { display: block; }
   .stage { top: 0; height: 52dvh; z-index: 2; border-bottom: 1px solid var(--line); background-color: var(--bg); }
   .map text { font-size: 24px; }
@@ -152,4 +148,116 @@ h2 { margin: 12px 0 0; max-width: 14ch; font: 750 clamp(2rem, 3.6vw, 3.4rem)/1 v
   .ping { animation: none; opacity: 0; }
   .btn, .node, .link { transition: none; }
   .js .chapter > *, .js h1 .ch { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---- Liquid glass: the floating dock and the construction sign. ----
+   A clear, thick-looking lens: light fill, bright rim that turns toward the pointer, inner glow, soft shadow.
+   glass.js adds the real bending of whatever is behind it at the rim (Chromium); elsewhere it is frosted glass. */
+:root {
+  --glass-fill: rgba(255, 255, 255, .1); --glass-rim: rgba(255, 255, 255, .95); --glass-rim-dim: rgba(255, 255, 255, .28);
+  --glass-glow: rgba(255, 255, 255, .14); --glass-shade: rgba(29, 29, 29, .22);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --glass-fill: rgba(255, 255, 255, .03); --glass-rim: rgba(255, 255, 255, .55); --glass-rim-dim: rgba(255, 255, 255, .1);
+    --glass-glow: rgba(255, 255, 255, .06); --glass-shade: rgba(0, 0, 0, .65);
+  }
+}
+:root[data-theme="dark"] {
+  --glass-fill: rgba(255, 255, 255, .03); --glass-rim: rgba(255, 255, 255, .55); --glass-rim-dim: rgba(255, 255, 255, .1);
+  --glass-glow: rgba(255, 255, 255, .06); --glass-shade: rgba(0, 0, 0, .65);
+}
+.glass-defs { position: absolute; width: 0; height: 0; }
+.glass {
+  --glint: 135deg; --glass-blur: .8px;
+  isolation: isolate; border-radius: 40px; background: var(--glass-fill);
+  backdrop-filter: blur(6px) saturate(1.8); -webkit-backdrop-filter: blur(6px) saturate(1.8);
+  box-shadow:
+    inset 0 1px 1px var(--glass-rim), inset 0 -1px 1px var(--glass-rim-dim), inset 0 0 26px var(--glass-glow),
+    0 1px 2px rgba(0, 0, 0, .1), 0 22px 50px -14px var(--glass-shade);
+}
+.glass::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.2px; pointer-events: none;
+  background: linear-gradient(var(--glint), var(--glass-rim), transparent 32%, transparent 68%, var(--glass-rim-dim));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.glass::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(120% 90% at 18% -20%, var(--glass-glow), transparent 60%);
+}
+
+/* dock: the menu floats at the bottom centre, like a phone tab bar */
+.dock { position: fixed; left: 50%; bottom: 16px; translate: -50% 0; z-index: 11; display: flex; gap: 2px; padding: 6px; border-radius: 999px; --glass-bezel: 18px;
+  /* text scrolls under the dock, so it is frostier than the other glass to keep its labels readable */
+  background: color-mix(in srgb, var(--bg) 58%, transparent); --glass-blur: 7px; }
+.dock a { padding: 8px 14px; border-radius: 999px; text-decoration: none; white-space: nowrap; font-size: 13px; transition: background .2s, color .2s; }
+.dock a:hover, .dock a:focus-visible { background: color-mix(in srgb, var(--ink) 9%, transparent); }
+.dock a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+/* inner pages (blog, services): one text column on grid paper */
+.page {
+  min-height: 100dvh; padding: 128px var(--pad) 120px;
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.page > * { max-width: 760px; }
+.page h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
+.back { display: inline-block; margin-bottom: 24px; color: var(--muted); text-decoration: none; }
+.back:hover { color: var(--ink); }
+
+/* blog list, laid out like a terminal listing */
+.prompt { margin: 48px 0 0; color: var(--muted); }
+.prompt b { color: var(--accent); font-weight: 400; }
+.cursor { display: inline-block; width: 1ch; background: var(--accent); color: transparent; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.posts { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.posts li { display: grid; grid-template-columns: 11ch 1fr; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.posts time { color: var(--muted); }
+.posts a { font: 700 1.15rem/1.3 var(--sans); letter-spacing: -.01em; text-decoration: none; }
+.posts a:hover { color: var(--accent); }
+.posts .where { margin-left: 8px; font: 11px var(--mono); color: var(--accent); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.posts p { grid-column: 2; margin: 0; font: 400 1rem/1.5 var(--sans); color: var(--muted); }
+
+/* a post */
+.prose h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1; }
+.prose h2 { max-width: none; margin-top: 40px; font-size: 1.5rem; letter-spacing: -.02em; }
+.prose p, .prose li { font: 400 1.1rem/1.6 var(--sans); }
+.prose .lede { margin-bottom: 40px; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 48px 0; }
+
+/* services: an ASCII barrier with marching stripes, sitting on glass */
+.sign { position: relative; width: fit-content; max-width: 100%; margin-top: 48px; padding: 28px 32px; overflow: hidden; --glass-bezel: 26px; }
+.ascii { margin: 0; font: 13px/1.25 var(--mono); white-space: pre; }
+.frames { position: relative; }
+.frames pre + pre { position: absolute; inset: 0; }
+.sign .ascii b { color: var(--accent); font-weight: 700; }
+.progress { margin: 16px 0 0; white-space: nowrap; color: var(--muted); }
+.progress i { display: inline-block; width: 20ch; vertical-align: bottom; overflow: hidden; font-style: normal; color: var(--accent); }
+
+/* footer: a tiny ASCII spinner (static where the browser cannot animate it) */
+.spin::before { content: "| "; white-space: pre; font-style: normal; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .glass { transition: transform .45s cubic-bezier(.34, 1.56, .64, 1); }
+  .frames pre { animation: frame-a .9s steps(1) infinite; }
+  .frames pre + pre { animation-name: frame-b; }
+  @keyframes frame-a { 0% { opacity: 1; } 50% { opacity: 0; } }
+  @keyframes frame-b { 0% { opacity: 0; } 50% { opacity: 1; } }
+  .progress i { animation: fill 6s steps(20) infinite; }
+  @keyframes fill { from { width: 0; } to { width: 20ch; } }
+  .spin::before { animation: spin .8s steps(1) infinite; }
+  @keyframes spin { 0% { content: "| "; } 25% { content: "/ "; } 50% { content: "- "; } 75% { content: "\\ "; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .frames pre + pre { display: none; }
+  .cursor { animation: none; }
+}
+@media (max-width: 900px) {
+  .dock a { padding: 8px 10px; font-size: 12px; }
+  .page { padding: 96px 16px 120px; }
+  .posts li { grid-template-columns: 1fr; }
+  .posts p { grid-column: 1; }
+  .sign { padding: 20px 16px; }
+  .ascii { font-size: 10px; }
 }

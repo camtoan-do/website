@@ -1,0 +1,35 @@
+# Keeps camtoan.me/blog in step with Substack: once a day it rebuilds the post list and commits it
+# only if something changed. If Substack is down or the feed looks wrong, the run fails and the page stays as it was.
+name: Refresh blog list
+
+on:
+  schedule:
+    - cron: "17 13 * * *" # daily, about 6am Calgary time
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/scripts/build-blog.mjs", ".github/workflows/blog.yml"]
+
+# Least privilege: this job may write to the repo's files and nothing else.
+permissions:
+  contents: write
+
+concurrency:
+  group: blog
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - run: node .github/scripts/build-blog.mjs
+      - name: Commit the list if it changed
+        run: |
+          git diff --quiet -- blog/index.html && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add blog/index.html
+          git commit -m "Refresh the blog list from Substack"
+          git push
