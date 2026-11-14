@@ -36,6 +36,12 @@ const res = await fetch(FEED, {
   headers: { "User-Agent": "Mozilla/5.0 (compatible; camtoan-me-build; +https://camtoan.me)" },
   signal: AbortSignal.timeout(15_000),
 });
+// Substack's bot wall answers 403 to GitHub's runner IPs (works from home). Not a broken page: warn and keep the list.
+// shortcut: blog only refreshes when run by hand while this lasts; move the fetch off GitHub runners if it stays blocked.
+if (res.status === 403) {
+  console.log("::warning::Substack blocked this runner (HTTP 403); blog list left as it was. Run the script locally to refresh.");
+  process.exit(0);
+}
 if (!res.ok) throw new Error(`Substack feed answered HTTP ${res.status}`);
 const xml = await res.text();
 
